@@ -11,8 +11,13 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { redirect } from "next/navigation";
 
 export default function RegisterPage() {
+  async function register() {
+    'use server';
+    redirect('/dashboard');
+  }
   return (
     <Card>
       <CardHeader>
@@ -22,7 +27,7 @@ export default function RegisterPage() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="space-y-4">
+        <form className="space-y-4" action={register}>
           <div className="space-y-2">
             <Label htmlFor="full-name">Full Name</Label>
             <Input id="full-name" placeholder="John Doe" required />
@@ -49,8 +54,8 @@ export default function RegisterPage() {
               </p>
             </div>
           </div>
-          <Button type="submit" className="w-full bg-primary hover:bg-primary/90" asChild>
-            <Link href="/dashboard">Create account</Link>
+          <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
+            Create account
           </Button>
         </form>
         <div className="mt-4 text-center text-sm">

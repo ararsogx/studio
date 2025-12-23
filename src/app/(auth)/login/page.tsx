@@ -10,8 +10,13 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { redirect } from "next/navigation";
 
 export default function LoginPage() {
+  async function login() {
+    'use server';
+    redirect('/dashboard');
+  }
   return (
     <Card>
       <CardHeader>
@@ -21,7 +26,7 @@ export default function LoginPage() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="space-y-4">
+        <form className="space-y-4" action={login}>
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" type="email" placeholder="m@example.com" required />
@@ -39,8 +44,8 @@ export default function LoginPage() {
               Forgot password?
             </Link>
           </div>
-          <Button type="submit" className="w-full bg-primary hover:bg-primary/90" asChild>
-            <Link href="/dashboard">Sign in</Link>
+          <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
+            Sign in
           </Button>
           <Button variant="outline" className="w-full">
             Sign in with Google
